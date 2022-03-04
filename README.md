@@ -22,7 +22,7 @@ At this stage, our payload is: 0x2c x b'a' + callme_one_address
 
 After hijacking the instruction pointer, we check out the ROPgadgets. We are looking to pop three variables off the stack to send call the next callme function at the next return address. 
 
-*insert screenshot ROPgadget here* 
+![image](https://user-images.githubusercontent.com/79220528/156765393-0ebe6c71-34f4-4843-8664-8a8d0baf3994.png)
 
 The ROPgadget for our situation is ################## and we will call it ROPPOP. 
 
