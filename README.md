@@ -16,8 +16,21 @@ Open the binary with rabin2 with the command 'r2 callme32' and observe the pwnme
 
 *insert radare2 screenshot here*
 
-We know var_28h in 0x28 bytes away from the base pointer, and 0x28+0x4 bytes away from the return to main address. Our payload must begin with 0x2c bytes of junk followed by the callme_one address we got from the imported function addresses. 
+We know var_28h in 0x28 bytes away from the base pointer, and 0x28+0x4 bytes away from the return to main address. Our payload must begin with 0x2c bytes of junk followed by the callme_one address to hijack the instruction pointer.
 
 At this stage, our payload is: 0x2c x b'a' + callme_one_address
 
-For now, we will add j
+After hijacking the instruction pointer, we check out the ROPgadgets. We are looking to pop three variables off the stack to send call the next callme function at the next return address. 
+
+*insert screenshot ROPgadget here* 
+
+The ROPgadget for our situation is ################## and we will call it ROPPOP. 
+
+So we know the offset, ROPgedet, variables and function addresses. Now we craft our payload. 
+
+payload = b'a' * junkOffset + callme1 + ROPPOP + variables + callme2 + ROPPOP + variables + callme3 + ROPPOP + variables
+
+Using pwntools, we create the process, send the payload, and print the output. 
+
+
+
